@@ -1,3 +1,5 @@
+package src;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -105,7 +107,7 @@ public class TreeVisualizer extends JPanel {
 
  /*   public static void main(String[] args) {
         String input = "(A[20,10]|(B[20,10]|C[30,10]))-(D[30,50]|(E[40,30]-F[40,20]))";
-        Node root = StringSplitter.splitString(input);
+        TreeNode root = StringSplitter.splitString(input);
 
         JFrame frame = new JFrame("Binary Tree Visualizer");
         TreeVisualizer visualizer = new TreeVisualizer(root);
