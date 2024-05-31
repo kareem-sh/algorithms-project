@@ -1,18 +1,30 @@
+package Window;
+import src.*;
+
+import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
+import java.awt.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
-public class BinaryTreeInputGUI extends JFrame {
 
+
+public class Import_Window extends JFrame {
     private JTextField inputField;
     private JButton drawButton;
 
-    public BinaryTreeInputGUI() {
+    public Import_Window() {
         setTitle("Binary Tree Input");
         setExtendedState(JFrame.MAXIMIZED_BOTH); // Set to full screen
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null); // Center the window
 
         initComponents();
@@ -34,7 +46,7 @@ public class BinaryTreeInputGUI extends JFrame {
 
         // Input panel
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10)); // Centered flow layout with spacing
-        JLabel inputLabel = new JLabel("Enter the binary tree string:");
+        JLabel inputLabel = new JLabel("Enter the Rectangle file:");
         inputField = new JTextField(30); // Larger input field
         inputField.setFont(new Font("poppins", Font.PLAIN, 24)); // Set font size
         inputPanel.add(inputLabel);
@@ -52,19 +64,19 @@ public class BinaryTreeInputGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String input = inputField.getText().trim();
                 if (!input.isEmpty()) {
-                    Node root = StringSplitter.splitString(input);
+                    Node root = StringSplitter.ImportToTree(input);
                     TreeVisualizer visualizerPanel = new TreeVisualizer(root);
-        
+
                     JFrame frame = new JFrame("Binary Tree Visualizer");
                     frame.getContentPane().add(visualizerPanel);
                     frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Set to full screen
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setVisible(true);
-        
+
                     // Close the input GUI
-                    BinaryTreeInputGUI.this.dispose();
+                    Import_Window.this.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(BinaryTreeInputGUI.this,
+                    JOptionPane.showMessageDialog(Import_Window.this,
                             "Please enter a binary tree string.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -79,34 +91,4 @@ public class BinaryTreeInputGUI extends JFrame {
 
         add(mainPanel);
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new BinaryTreeInputGUI().setVisible(true);
-            }
-        });
-       
-      /*  String input = "(A[20,10] | (B[20,10]|C[30,10])) - (D[30,50] | (E[40,30] - F[40,20]))";
-        Node root = StringSplitter.splitString(input);
-        StringSplitter.export(root);*/
-    /*    try {
-
-        StringSplitter s= new StringSplitter();
-        ArrayList<Node>arr = new ArrayList<>();
-        arr=s.TreeTNodes(root);
-        for(Node f:arr)
-        {
-            System.out.println(f.data);
-        }
-        StringSplitter.drawTree(root , "tree.txt");
-        StringSplitter.SwapDraw(root , "tree2.txt");
-       } catch (Exception e) {
-     
-       } 
-      
-    
-     */
-    }
 }
-
