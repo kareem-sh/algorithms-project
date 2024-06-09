@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BFS {
     
@@ -93,36 +94,46 @@ public class BFS {
     }
     
     
-    public static Node convertToNary(BinaryNode root) {
+  
+    
+   public static Node convertToNary(BinaryNode root) {
         if (root == null) {
             return null;
         }
-    
-        Node naryRoot = new Node(root.data);
-        convert(root, naryRoot);
-        return naryRoot;
+
+        Node naryNode = new Node(root.data);
+        convert(root, naryNode);
+        return naryNode;
     }
-    
+
     private static void convert(BinaryNode binaryNode, Node naryNode) {
-        if (binaryNode == null) {
-            return;
-        }
-    
-        if (binaryNode.left != null) {
-            Node firstChild = new Node(binaryNode.left.data);
-            naryNode.children.add(firstChild);
-            convert(binaryNode.left, firstChild);
-        }
-    
-        BinaryNode current = binaryNode.right;
-        while (current != null) {
-            Node sibling = new Node(current.data);
-            naryNode.children.add(sibling);
-            convert(current, sibling);
-            current = current.right;
+        if (binaryNode.right != null) {
+            BinaryNode firstChild = binaryNode.right;
+            Stack<BinaryNode> stack = new Stack<>();
+            stack.push(firstChild);
+            convert(firstChild, naryNode.children, stack);
+
+            BinaryNode sibling = firstChild.left;
+            while (sibling != null) {
+                stack.push(sibling);
+                convert(sibling, naryNode.children, stack);
+                sibling = sibling.left;
+            }
+
+            // Reverse order by popping from the stack
+            while (!stack.isEmpty()) {
+                BinaryNode child = stack.pop();
+                Node childNode = new Node(child.data);
+                naryNode.children.add(childNode);
+                // Ensure childNode gets its children converted
+                convert(child, childNode);
+            }
         }
     }
-    
+
+    private static void convert(BinaryNode binaryNode, List<Node> children, Stack<BinaryNode> stack) {
+        // This function is a placeholder to avoid the stack argument in the main convert method
+    }
 
 
-}
+  }
