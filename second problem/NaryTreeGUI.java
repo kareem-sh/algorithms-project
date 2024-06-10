@@ -9,11 +9,11 @@ class NaryTreeGUI extends JPanel {
     private final int nodeRadius = 30; // Increased node size
     private final int lineWidth = 3; // Increased line width
     private final int verticalGap = 150; // Increased vertical gap
-    private JFrame parentFrame;
+
 
     NaryTreeGUI(Node root, JFrame parentFrame) {
         this.root = root;
-        this.parentFrame = parentFrame;
+   
         this.setBackground(Color.WHITE);
 
         // Set preferred size to match screen dimensions

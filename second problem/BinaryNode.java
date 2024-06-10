@@ -11,4 +11,8 @@ public class BinaryNode {
         left=null;
         right=null;
     }
+    @Override
+    public String toString() {
+        return data;
+    }
 }

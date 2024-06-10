@@ -68,7 +68,7 @@
 
     import javax.swing.*;
 
-import javafx.event.ActionEvent;
+
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -77,7 +77,7 @@ import java.awt.event.ActionListener;
         private final BinaryNode root;
         private final int nodeRadius = 22; // Increased node size
         private final int lineWidth = 2; // Increased line width
-        private JFrame parentFrame;
+    
 
         TreePanel(BinaryNode root,JFrame parentFrame) {
             this.root = root;
