@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +40,39 @@ public class BFS {
                 }
             }
         }
+    }
+
+    public void ExportToFile(Node root) {
+       try (BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter("test.txt"))) {
+        if (root == null) {
+            return;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.poll();
+            
+            if (!currentNode.children.isEmpty()) {
+                bufferedWriter.write(currentNode.data + "->");
+
+                List<String> childValues = new ArrayList<>();
+                for (Node child : currentNode.children) {
+                    childValues.add(child.data);
+                    queue.add(child);
+                }
+                bufferedWriter.write(String.join(",", childValues)+"\n");
+            } else {
+                for (Node child : currentNode.children) {
+                    queue.add(child);
+                }
+            }
+        }
+       } catch (Exception e) {
+        
+       }
+       
     }
 
 

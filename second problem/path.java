@@ -96,6 +96,7 @@
          JFrame frame = new JFrame("Tree Visualizer");
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          NaryTreeGUI treePanel = new NaryTreeGUI(b.Import(s), frame);
+         
          frame.add(treePanel);
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          treePanel.setOpaque(true); // Content panes must be opaque

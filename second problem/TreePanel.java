@@ -104,7 +104,8 @@ import java.awt.event.ActionListener;
             public void actionPerformed(java.awt.event.ActionEvent arg0) {
                 JFrame frame = new JFrame("Binary Tree");
                 NaryTreeGUI binaryTreeGUI = new NaryTreeGUI(BFS.convertToNary(root),frame);
-               
+                BFS b = new BFS();
+                b.ExportToFile(BFS.convertToNary(root));
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.add(binaryTreeGUI);
                 frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Set to full screen
