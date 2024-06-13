@@ -6,38 +6,37 @@ import java.util.List;
 
 class NaryTreeGUI extends JPanel {
     private Node root;
-    private final int nodeRadius = 30; // Increased node size
-    private final int lineWidth = 3; // Increased line width
-    private final int verticalGap = 150; // Increased vertical gap
-
+    private final int nodeRadius = 30;
+    private final int lineWidth = 3; 
+    private final int verticalGap = 100; 
 
     NaryTreeGUI(Node root, JFrame parentFrame) {
         this.root = root;
-   
+
         this.setBackground(Color.WHITE);
 
-        // Set preferred size to match screen dimensions
+       
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setPreferredSize(screenSize);
 
-        // Create the button and customize its appearance
+        
         JButton convertButton = new JButton("Convert to Binary Tree");
         convertButton.setFont(new Font("Poppins-Regular", Font.PLAIN, 22));
-        convertButton.setPreferredSize(new Dimension(300, 50)); // Set preferred size for the button
+        convertButton.setPreferredSize(new Dimension(300, 50)); 
         convertButton.setBackground(new Color(100, 149, 237)); // Same color as nodes
         convertButton.setForeground(Color.WHITE); // Text color
         convertButton.setFocusPainted(false); // Remove focus border
         convertButton.setBorderPainted(false); // Remove button border
         convertButton.setContentAreaFilled(false); // Remove default background fill
-        convertButton.setOpaque(true); // Ensure background color is visible
+        convertButton.setOpaque(true); 
 
         convertButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Binary Tree");
-                TreePanel binaryTreeGUI = new TreePanel(BFS.convertToBinary(root),frame);
+                TreePanel binaryTreeGUI = new TreePanel(BFS.convertToBinary(root), frame);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.add(binaryTreeGUI);
+                frame.add(new JScrollPane(binaryTreeGUI, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS));
                 frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Set to full screen
                 frame.setVisible(true);
                 parentFrame.dispose(); // Dispose of the current frame
@@ -56,6 +55,13 @@ class NaryTreeGUI extends JPanel {
 
         this.setLayout(new BorderLayout());
         this.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Add scroll pane to enable scrolling
+        JScrollPane scrollPane = new JScrollPane(this, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.getViewport().setBackground(Color.WHITE); // Set background color of scroll pane
+
+        // Add scroll pane to the main frame
+        parentFrame.add(scrollPane);
     }
 
     @Override
@@ -118,4 +124,3 @@ class NaryTreeGUI extends JPanel {
         }
     }
 }
-

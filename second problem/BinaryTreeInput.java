@@ -24,7 +24,7 @@ public class BinaryTreeInput extends JFrame {
         nodes = new ArrayList<>();
         parentComboBoxModel = new DefaultComboBoxModel<>();
 
-        JPanel panel = new JPanel(new GridLayout(6, 2));
+        JPanel panel = new JPanel(new GridLayout(8, 2));
 
         panel.add(new JLabel("Node Name:"));
         nameField = new JTextField();
@@ -47,10 +47,18 @@ public class BinaryTreeInput extends JFrame {
 
         JButton addButton = new JButton("Add Node");
         panel.add(addButton);
+   
+        JButton deleteButton = new JButton("Delete Node");
+        panel.add(deleteButton);
 
+       
         JButton saveButton = new JButton("Save Tree");
         panel.add(saveButton);
+        
+        JButton convertAndSaveButton = new JButton("Convert and Save to File");
+        panel.add(convertAndSaveButton);
 
+       
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,6 +74,20 @@ public class BinaryTreeInput extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addNode();
+            }
+        });
+
+        convertAndSaveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               new path_2(root).setVisible(true);
+            }
+        });
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteNode();
             }
         });
 
@@ -130,6 +152,30 @@ public class BinaryTreeInput extends JFrame {
         clearFields();
     }
 
+    private void deleteNode() {
+        BinaryNode node = (BinaryNode) parentComboBox.getSelectedItem();
+        if (node == null) {
+            JOptionPane.showMessageDialog(this, "Please select a node to delete.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (node == root) {
+            root = null;
+        } else {
+            for (BinaryNode parent : nodes) {
+                if (parent.left == node) {
+                    parent.left = null;
+                    break;
+                } else if (parent.right == node) {
+                    parent.right = null;
+                    break;
+                }
+            }
+        }
+        nodes.remove(node);
+        updateParentComboBox();
+    }
+
     private void updateParentComboBox() {
         parentComboBoxModel.removeAllElements();
         for (BinaryNode node : nodes) {
@@ -143,4 +189,6 @@ public class BinaryTreeInput extends JFrame {
         nameField.setText("");
         directionGroup.clearSelection();
     }
+
+  
 }

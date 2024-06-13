@@ -42,8 +42,10 @@ public class BFS {
         }
     }
 
-    public void ExportToFile(Node root) {
-       try (BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter("test.txt"))) {
+ 
+
+    public void ExportToFile(Node root,String filename) {
+       try (BufferedWriter bufferedWriter=new BufferedWriter(new FileWriter(filename))) {
         if (root == null) {
             return;
         }
@@ -146,29 +148,25 @@ public class BFS {
             BinaryNode firstChild = binaryNode.right;
             Stack<BinaryNode> stack = new Stack<>();
             stack.push(firstChild);
-            convert(firstChild, naryNode.children, stack);
+          
 
             BinaryNode sibling = firstChild.left;
             while (sibling != null) {
                 stack.push(sibling);
-                convert(sibling, naryNode.children, stack);
+              
                 sibling = sibling.left;
             }
 
-            // Reverse order by popping from the stack
+            // stack used to reverse
             while (!stack.isEmpty()) {
                 BinaryNode child = stack.pop();
                 Node childNode = new Node(child.data);
                 naryNode.children.add(childNode);
-                // Ensure childNode gets its children converted
                 convert(child, childNode);
             }
         }
     }
 
-    private static void convert(BinaryNode binaryNode, List<Node> children, Stack<BinaryNode> stack) {
-        // This function is a placeholder to avoid the stack argument in the main convert method
-    }
-
+   
 
   }

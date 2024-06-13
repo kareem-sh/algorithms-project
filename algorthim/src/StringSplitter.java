@@ -368,7 +368,7 @@ public class StringSplitter {
         findRectangles(drawing, visited, rectangles);
         return rectangles;
     }
-    private static void findRectangles (String[]drawing, Map visited, List < Rectangle > rectangles){
+    private static void findRectangles (String[]drawing, @SuppressWarnings("rawtypes") Map visited, List < Rectangle > rectangles){
         boolean found = true, found2 = true, map = false;
 
         for (int row = 1; row < drawing.length - 1; row++) {
@@ -432,7 +432,8 @@ public class StringSplitter {
         return row - start + 1 ;
     }
 
-    private static void markVisited (Map visited, String alpha){
+    @SuppressWarnings("unchecked")
+    private static void markVisited (@SuppressWarnings("rawtypes") Map visited, String alpha){
         visited.replace(alpha, true);
     }
 
@@ -453,7 +454,7 @@ public class StringSplitter {
 ///ANSWER FOR QUESTION NUMBER 4
     public static void FormRectangle() {
 
-        List<Rectangle> rectangles = List.of(
+        List<Rectangle> rectangles =  Arrays.asList(
                 new Rectangle(10, 20, "A"),
                 new Rectangle(10, 20, "B"),
                 new Rectangle(10, 30, "C"),

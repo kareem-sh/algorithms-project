@@ -4,20 +4,21 @@
  * and open the template in the editor.
  */
 
- import javax.swing.JFrame;
 
 
  /**
   *
   * @author Fouad
   */
- public class path extends javax.swing.JFrame {
+ public class path_2 extends javax.swing.JFrame {
      /**
       * Creates new form path
       */
-     public path() {
+       private BinaryNode root = new BinaryNode();
+     public path_2(BinaryNode root) {
          initComponents();
          this.setSize(773, 400);
+         this.root=root;
      }
  
      /**
@@ -94,24 +95,10 @@
          // Retrieve text from the text field
          String s = jTextField1.getText();
          BFS b = new BFS();
-         JFrame frame = new JFrame("Tree Visualizer");
-         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         NaryTreeGUI treePanel = new NaryTreeGUI(b.Import(s), frame);
-        frame.add(treePanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        treePanel.setOpaque(true); // Content panes must be opaque
-        frame.setContentPane(treePanel);
-         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Set to full screen
-         frame.setResizable(true);
-         // Display the window
-         frame.pack();
-         frame.setVisible(true);
-
-
-      
-       
-       
-     }//GEN-LAST:event_jButton2ActionPerformed
+         b.ExportToFile(BFS.convertToNary(root),s);
+        this.dispose();
+        
+        }
  
      /**
       * @param args the command line arguments
@@ -130,20 +117,21 @@
                  }
              }
          } catch (ClassNotFoundException ex) {
-             java.util.logging.Logger.getLogger(path.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(path_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          } catch (InstantiationException ex) {
-             java.util.logging.Logger.getLogger(path.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(path_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          } catch (IllegalAccessException ex) {
-             java.util.logging.Logger.getLogger(path.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(path_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-             java.util.logging.Logger.getLogger(path.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(path_2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
          }
          //</editor-fold>
  
          /* Create and display the form */
          java.awt.EventQueue.invokeLater(new Runnable() {
              public void run() {
-                 new path().setVisible(true);
+                BinaryNode root = new BinaryNode();
+                 new path_2(root).setVisible(true);
              }
          });
      }
